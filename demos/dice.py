@@ -7,7 +7,7 @@ those two attributes.
 
 Run it from the repo root::
 
-    python demos/day1_dice.py
+    python demos/dice.py
 
 The printed transcript shows four beats: the user task, the assistant's tool
 call, the tool result, and the assistant's final answer.
