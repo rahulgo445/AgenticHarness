@@ -55,7 +55,8 @@ def main():
 
     system = build_system_prompt(workdir, extra=catalog_prompt(workdir))
     messages = [{"role": "user", "text":
-                 "Write a two-sentence welcome blurb for our app's home page."}]
+                 "Reply with a two-sentence welcome blurb for our app's home "
+                 "page. Do not create or edit any files -- just answer."}]
     answer = run_loop(provider.DEFAULT_MODEL, system, messages, tools,
                       on_event, lambda call: None)
     print("\nFINAL: %s" % answer)
