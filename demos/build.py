@@ -49,8 +49,13 @@ def main():
     messages = [{"role": "user", "text": task}]
     answer = run_loop(
         provider.DEFAULT_MODEL,
-        "You are a coding agent working in %s. Use the tools to make the change "
-        "and verify it by running code before you answer." % workdir,
+        "You are an autonomous coding agent working in %s. Carry out the "
+        "request with the tools -- write code, run it, read the output -- and "
+        "verify your work before answering. A sandbox confines every path to "
+        "the working directory and a policy blocks irreversible commands, so "
+        "attempt the task rather than refusing up front; if a tool result "
+        "begins with BLOCKED or ERROR, read it and respond accordingly."
+        % workdir,
         messages, tools, on_event, policy.check,
     )
     print("\nFINAL: %s" % answer)
