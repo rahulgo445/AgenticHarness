@@ -1,6 +1,6 @@
-"""Day 1 -- the provider seam.
+"""The provider seam.
 
-Concept: one function, ``complete()``, is the only place Odysseus talks to a
+One function, ``complete()``, is the only place Odysseus talks to a
 language model. Everything above it works in a small neutral message format
 and never sees Gemini's wire shape.
 

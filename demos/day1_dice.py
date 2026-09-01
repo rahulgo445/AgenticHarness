@@ -1,7 +1,7 @@
-"""Day 1 demo -- one hand-written tool through the loop.
+"""One hand-written tool through the loop.
 
-Concept: the smallest useful shape of a tool is an object with ``.spec`` (the
-JSON schema the model sees) and ``.run`` (the callable the loop invokes with
+The smallest useful shape of a tool is an object with ``.spec`` (the JSON
+schema the model sees) and ``.run`` (the callable the loop invokes with
 keyword arguments). Nothing here is framework magic; the loop only needs
 those two attributes.
 
@@ -9,9 +9,8 @@ Run it from the repo root::
 
     python demos/day1_dice.py
 
-Watch the printed transcript for the four beats the day is teaching: the user
-task, the assistant's tool call, the tool result, and the assistant's final
-answer.
+The printed transcript shows four beats: the user task, the assistant's tool
+call, the tool result, and the assistant's final answer.
 """
 
 import os

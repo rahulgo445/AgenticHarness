@@ -1,9 +1,8 @@
-"""Day 1 -- the agent loop.
+"""The agent loop.
 
-Concept: ``run_loop()`` drives the conversation. It asks the model for a
-reply, runs whatever tools the model called, feeds the results back, and
-repeats until the model answers with no tool calls or the turn budget is
-spent.
+``run_loop()`` drives the conversation. It asks the model for a reply, runs
+whatever tools the model called, feeds the results back, and repeats until
+the model answers with no tool calls or the turn budget is spent.
 
 Design rules this file embodies:
 - The loop never crashes because a tool did. An unknown tool name or a raised
@@ -12,9 +11,9 @@ Design rules this file embodies:
 - Every side effect is observable and gated. ``on_event()`` reports each
   assistant reply and brackets every tool run; ``before_tool()`` is a policy
   hook that may block a call before it happens.
-- ``before_turn()`` is the seam for context management. Today it is inert;
-  day 3 hangs compaction on it. It rewrites the message list in place so the
-  loop keeps its single source of truth.
+- ``before_turn()`` is the seam for context management: when a caller supplies
+  it, it rewrites the message list in place before each model call so the loop
+  keeps its single source of truth. It is inert when left unset.
 """
 
 from . import provider
@@ -35,7 +34,7 @@ def run_loop(model, system, messages, tools, on_event, before_tool,
     specs = [t.spec for t in tools.values()]
     for _ in range(max_turns):
         if before_turn is not None:
-            before_turn(messages)  # in-place rewrite; day 3 compaction seam
+            before_turn(messages)  # in-place rewrite; context-compaction seam
         reply = provider.complete(model, system, messages, specs)
         messages.append({"role": "assistant", "text": reply["text"],
                          "tool_calls": reply["tool_calls"]})
