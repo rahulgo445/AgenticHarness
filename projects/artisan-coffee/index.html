@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terra Firma | Specialty Coffee Roasters in Goa</title>
+    <style>
+        :root {
+            /* Design System */
+            --color-bg: #f9f6f0;
+            --color-bg-rgb: 249, 246, 240;
+            --color-text: #2c2a28;
+            --color-primary: #d35400;
+            --color-primary-hover: #e67e22;
+            --color-secondary: #27ae60;
+            --color-surface: #ffffff;
+            --color-border: #e0dcd3;
+            --color-muted: #7f8c8d;
+            
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-serif: "Merriweather", "Georgia", serif;
+            
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 4rem;
+            --spacing-xxl: 8rem;
+            
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --color-bg: #1a1a1a;
+            --color-bg-rgb: 26, 26, 26;
+            --color-primary: #e67e22;
+            --color-primary-hover: #f39c12;
+            --color-text: #f4f4f4;
+            --color-surface: #2a2a2a;
+            --color-border: #444;
+            --color-muted: #aaa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-serif);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.2;
+        }
+
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--color-primary-hover);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        
+
+        
+        /* Focus states */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        .tab-btn:focus-visible,
+        .accordion-header:focus-visible,
+        .theme-toggle:focus-visible,
+        .mobile-menu-btn:focus-visible {
+            outline: 3px solid var(--color-primary);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+        
+        .btn:focus-visible,
+        .tab-btn:focus-visible {
+            border-radius: var(--radius-md);
+        }
+
+        .switch input:focus-visible + .slider {
+            outline: 3px solid var(--color-primary);
+            outline-offset: 3px;
+        }
+
+        /* Header & Nav */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(var(--color-bg-rgb), 0.9);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+            padding: var(--spacing-md) 0;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--color-text);
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--color-text);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: var(--spacing-lg);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--color-bg);
+                border-bottom: 1px solid var(--color-border);
+                padding: var(--spacing-md);
+                box-shadow: var(--shadow-md);
+            }
+            nav.active {
+                display: block;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-family: var(--font-sans);
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--color-surface);
+        }
+
+        /* Sections */
+        section {
+            padding: var(--spacing-xxl) 0;
+        }
+
+        section:nth-child(even) {
+            background-color: var(--color-surface);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xl);
+            min-height: 80vh;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-muted);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--color-primary);
+            color: #fff;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: var(--radius-md);
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: var(--color-primary-hover);
+            color: #fff;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image svg {
+            max-width: 100%;
+            height: auto;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: var(--spacing-xl);
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        
+        @media (max-width: 360px) {
+            .hero-title {
+                font-size: 1.75rem;
+            }
+            .section-title {
+                font-size: 1.75rem;
+            }
+            .price-amount {
+                font-size: 2.25rem;
+            }
+            .btn {
+                padding: var(--spacing-sm) var(--spacing-md);
+                font-size: 0.9rem;
+            }
+            .accordion-header {
+                font-size: 1.1rem;
+                padding: var(--spacing-sm) var(--spacing-md);
+            }
+            .card {
+                padding: var(--spacing-md);
+            }
+            .pricing-toggle {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+        }
+
+        
+        @media (min-width: 1280px) {
+            .container {
+                max-width: 1280px;
+                padding: 0;
+            }
+            .hero-title {
+                font-size: 4.5rem;
+            }
+            .section-title {
+                font-size: 3rem;
+            }
+            .grid-3 {
+                gap: var(--spacing-xl);
+            }
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+        }
+
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .card-price {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* Pricing Toggle */
+        .pricing-toggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--color-border);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--color-primary);
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px var(--color-primary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .pricing-card {
+            text-align: center;
+            border: 2px solid var(--color-border);
+        }
+
+        .pricing-card.popular {
+            border-color: var(--color-primary);
+            position: relative;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--color-primary);
+            color: white;
+            padding: var(--spacing-xs) var(--spacing-md);
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            font-weight: bold;
+        }
+
+        .price-amount {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: var(--spacing-md) 0;
+        }
+
+        .price-period {
+            font-size: 1rem;
+            color: var(--color-muted);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: var(--spacing-lg) 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            margin-bottom: var(--spacing-sm);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .pricing-features li::before {
+            content: "✓";
+            color: var(--color-secondary);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            justify-content: flex-start;
+            padding-bottom: var(--spacing-sm);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (min-width: 768px) {
+            .tabs {
+                justify-content: center;
+                overflow-x: visible;
+                padding-bottom: 0;
+            }
+        }
+        .tab-btn {
+            background: none;
+            white-space: nowrap;
+            border: 2px solid var(--color-border);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            font-family: var(--font-sans);
+            font-weight: bold;
+            color: var(--color-text);
+            transition: var(--transition);
+        }
+
+        .tab-btn.active {
+            background-color: var(--color-primary);
+            border-color: var(--color-primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background-color: var(--color-surface);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Accordion */
+        .accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-sm);
+            background-color: var(--color-surface);
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            width: 100%;
+            text-align: left;
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: none;
+            border: none;
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--color-text);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .accordion-header:hover {
+            background-color: rgba(0,0,0,0.02);
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 var(--spacing-lg);
+            opacity: 0;
+        }
+
+        .accordion-item.active .accordion-content {
+            padding-top: var(--spacing-md);
+            padding-bottom: var(--spacing-md);
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            color: #fff;
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: var(--color-primary);
+        }
+
+        /* SVGs */
+        .svg-illustration {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            margin: 0 auto var(--spacing-lg);
+            display: block;
+        }
+        
+        .svg-stroke {
+            stroke: var(--color-text);
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        .svg-fill {
+            fill: var(--color-text);
+        }
+        
+        .svg-accent {
+            stroke: var(--color-primary);
+            stroke-width: 2;
+            fill: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Header -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">Terra Firma</div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Menu">☰</button>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#origins">Origins</a></li>
+                    <li><a href="#subscriptions">Subscribe</a></li>
+                    <li><a href="#brew-guides">Brew Guides</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
+                <span id="themeIcon">🌙 Dark Mode</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- 2. Hero Section -->
+    <section class="hero container" id="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Rooted in Goa. Roasted for the World.</h1>
+            <p class="hero-subtitle">We are Terra Firma, a specialty coffee roaster dedicated to sourcing the finest beans globally and roasting them with precision on the sun-drenched shores of Goa. Experience coffee that tells a story of its origin, crafted for clarity, sweetness, and balance.</p>
+            <a href="#origins" class="btn">Explore Our Coffees</a>
+        </div>
+        <div class="hero-image">
+            <!-- Hand-drawn inline SVG product artifact (Coffee Bag) -->
+            <svg viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Bag outline -->
+                <path class="svg-stroke" d="M40,280 L160,280 C170,280 175,270 170,260 L150,80 C148,60 140,40 120,40 L80,40 C60,40 52,60 50,80 L30,260 C25,270 30,280 40,280 Z" />
+                <!-- Bag top fold -->
+                <path class="svg-stroke" d="M70,40 L70,20 C70,15 75,10 80,10 L120,10 C125,10 130,15 130,20 L130,40" />
+                <path class="svg-stroke" d="M60,40 L140,40" />
+                <!-- Label -->
+                <rect class="svg-stroke" x="70" y="120" width="60" height="80" rx="4" />
+                <!-- Label details -->
+                <line class="svg-stroke" x1="80" y1="140" x2="120" y2="140" />
+                <line class="svg-stroke" x1="80" y1="155" x2="110" y2="155" />
+                <circle class="svg-accent" cx="100" cy="175" r="10" />
+                <!-- Coffee bean decoration -->
+                <path class="svg-accent" d="M95,175 C95,170 105,170 105,175 C105,180 95,180 95,175 Z" />
+                <path class="svg-accent" d="M97,172 C100,175 100,175 103,178" />
+                <!-- Creases -->
+                <path class="svg-stroke" d="M50,80 L65,150" />
+                <path class="svg-stroke" d="M150,80 L135,150" />
+                <path class="svg-stroke" d="M40,220 L60,280" />
+                <path class="svg-stroke" d="M160,220 L140,280" />
+            </svg>
+        </div>
+    </section>
+
+    <!-- 3. About Us -->
+    <section id="about">
+        <div class="container grid-2">
+            <div>
+                <!-- Hand-drawn inline SVG (Coffee Branch/Bean) -->
+                <svg class="svg-illustration" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Branch -->
+                    <path class="svg-stroke" d="M20,180 Q80,120 180,20" />
+                    <!-- Leaves -->
+                    <path class="svg-stroke" d="M60,140 C40,120 30,90 60,80 C90,70 100,100 80,120 Z" />
+                    <path class="svg-stroke" d="M120,80 C100,60 90,30 120,20 C150,10 160,40 140,60 Z" />
+                    <path class="svg-stroke" d="M100,140 C120,160 150,170 160,140 C170,110 140,100 120,120 Z" />
+                    <!-- Cherries -->
+                    <circle class="svg-accent" cx="85" cy="105" r="12" />
+                    <circle class="svg-accent" cx="105" cy="95" r="12" />
+                    <circle class="svg-accent" cx="130" cy="115" r="10" />
+                </svg>
+            </div>
+            <div>
+                <h2 class="section-title" style="text-align: left;">Our Story</h2>
+                <p>Terra Firma was born out of a profound respect for the earth and the incredible journey a coffee bean takes from seed to cup. Founded by a group of passionate coffee professionals who traded the bustling city life for the serene, inspiring landscapes of Goa, we set out to create a roastery that honors both the producer and the consumer.</p>
+                <p>We believe that exceptional coffee is not just about the roast; it's about the relationships we build with farmers across the globe. From the high altitudes of the Ethiopian highlands to the volcanic soils of Guatemala, and right here in the lush estates of Chikmagalur, we source beans that are cultivated with care and sustainability in mind.</p>
+                <p>Our roasting philosophy is simple: highlight the intrinsic qualities of each lot. We don't mask the flavors with heavy roasting; instead, we carefully develop the profile to bring out the unique terroir, varietal characteristics, and processing methods. Every batch is a testament to our dedication to quality, transparency, and the vibrant community we are building here in Goa.</p>
+                <p>When you drink Terra Firma, you are experiencing the culmination of thousands of hours of hard work by farmers, pickers, millers, and roasters. We invite you to join us on this journey of exploration and appreciation for specialty coffee.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Our Origins (6 Cards) -->
+    <section id="origins">
+        <div class="container">
+            <h2 class="section-title">Single Origin Offerings</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto var(--spacing-xl);">Discover our carefully curated selection of single-origin coffees. Each coffee is roasted to order, ensuring you receive the freshest and most vibrant flavors possible. Whether you prefer bright, fruity Africans or rich, chocolatey South Americans, we have something to delight your palate.</p>
+            
+            <div class="grid-3">
+                <!-- Card 1 -->
+                <div class="card">
+                    <h3 class="card-title">Monsooned Malabar</h3>
+                    <p style="color: var(--color-muted); margin-bottom: var(--spacing-sm);">Karnataka, India</p>
+                    <div class="card-price">₹650</div>
+                    <p>A uniquely Indian coffee, exposed to the moisture-laden monsoon winds. This process results in a heavy-bodied, low-acidity cup with distinct notes of dark chocolate, roasted nuts, and a hint of earthy spice. Perfect for a traditional espresso or a robust French press.</p>
+                    <p><strong>Process:</strong> Monsooned<br><strong>Varietal:</strong> Kent, S795<br><strong>Altitude:</strong> 1100m</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="card">
+                    <h3 class="card-title">Yirgacheffe Kochere</h3>
+                    <p style="color: var(--color-muted); margin-bottom: var(--spacing-sm);">SNNPR, Ethiopia</p>
+                    <div class="card-price">₹950</div>
+                    <p>A classic washed Ethiopian coffee that exemplifies elegance. Expect a tea-like body with a sparkling acidity. The flavor profile is dominated by intense floral aromatics, specifically jasmine, accompanied by sweet notes of bergamot, peach, and Meyer lemon.</p>
+                    <p><strong>Process:</strong> Washed<br><strong>Varietal:</strong> Heirloom<br><strong>Altitude:</strong> 1900m - 2100m</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="card">
+                    <h3 class="card-title">Antigua Los Volcanes</h3>
+                    <p style="color: var(--color-muted); margin-bottom: var(--spacing-sm);">Antigua, Guatemala</p>
+                    <div class="card-price">₹850</div>
+                    <p>Grown in the nutrient-rich volcanic soil of the Antigua valley, this coffee offers a beautifully balanced cup. It features a crisp malic acidity reminiscent of green apples, layered over a deep, sweet base of milk chocolate, caramel, and a subtle smokiness.</p>
+                    <p><strong>Process:</strong> Washed<br><strong>Varietal:</strong> Bourbon, Caturra<br><strong>Altitude:</strong> 1500m - 1700m</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="card">
+                    <h3 class="card-title">Tarrazu La Minita</h3>
+                    <p style="color: var(--color-muted); margin-bottom: var(--spacing-sm);">Tarrazu, Costa Rica</p>
+                    <div class="card-price">₹900</div>
+                    <p>Renowned for its pristine preparation, this Costa Rican gem delivers a spectacularly clean and vibrant cup. It bursts with juicy citrus notes, particularly sweet orange and tangerine, complemented by a honey-like sweetness and a smooth, lingering finish.</p>
+                    <p><strong>Process:</strong> Washed<br><strong>Varietal:</strong> Caturra, Catuai<br><strong>Altitude:</strong> 1300m - 1800m</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="card">
+                    <h3 class="card-title">Huila Pitalito</h3>
+                    <p style="color: var(--color-muted); margin-bottom: var(--spacing-sm);">Huila, Colombia</p>
+                    <div class="card-price">₹800</div>
+                    <p>A quintessential Colombian coffee that is incredibly versatile. It boasts a medium, syrupy body with a bright, cherry-like acidity. The flavor notes include brown sugar, red plum, and a rich cocoa finish that makes it an excellent choice for any brewing method.</p>
+                    <p><strong>Process:</strong> Washed<br><strong>Varietal:</strong> Castillo, Colombia<br><strong>Altitude:</strong> 1600m - 1900m</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="card">
+                    <h3 class="card-title">Mandheling Gayo</h3>
+                    <p style="color: var(--color-muted); margin-bottom: var(--spacing-sm);">Sumatra, Indonesia</p>
+                    <div class="card-price">₹750</div>
+                    <p>Processed using the traditional Giling Basah (wet-hulled) method, this Sumatran coffee is bold and complex. It features a massive, syrupy body with low acidity. Look for deep, earthy notes, dark chocolate, cedar, and a savory, herbal finish.</p>
+                    <p><strong>Process:</strong> Wet-hulled<br><strong>Varietal:</strong> Ateng, Tim Tim<br><strong>Altitude:</strong> 1300m - 1600m</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. The Roasting Process -->
+    <section id="roasting">
+        <div class="container grid-2">
+            <div>
+                <h2 class="section-title" style="text-align: left;">The Art & Science of Roasting</h2>
+                <p>At Terra Firma, roasting is where science meets intuition. We utilize a state-of-the-art Loring Smart Roaster, which employs a closed-loop roasting environment. This not only drastically reduces our carbon footprint by eliminating the need for an afterburner, but it also provides unparalleled consistency and control over the roasting environment.</p>
+                <p>Every new coffee that arrives at our facility undergoes rigorous sample roasting and cupping. We develop multiple roast profiles, tweaking variables such as charge temperature, rate of rise, and development time. Our goal is to find the "sweet spot" where the coffee's inherent acidity, sweetness, and body are in perfect harmony.</p>
+                <p>We log every roast using advanced software to ensure that once a profile is locked in, it can be replicated with exacting precision. However, we never rely solely on technology. Our head roaster relies on sensory cues—the smell of the Maillard reaction, the sound of first crack, and the color of the beans—to make micro-adjustments on the fly.</p>
+                <p>Quality control is paramount. Every production batch is cupped the following day to verify that it meets our stringent standards before it is packaged and shipped to you. This relentless pursuit of perfection is what defines the Terra Firma experience.</p>
+            </div>
+            <div>
+                <!-- Hand-drawn inline SVG (Roaster/Flame) -->
+                <svg class="svg-illustration" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Roaster Drum -->
+                    <circle class="svg-stroke" cx="100" cy="100" r="60" />
+                    <circle class="svg-stroke" cx="100" cy="100" r="40" />
+                    <circle class="svg-stroke" cx="100" cy="100" r="20" />
+                    <!-- Drum details -->
+                    <line class="svg-stroke" x1="100" y1="40" x2="100" y2="60" />
+                    <line class="svg-stroke" x1="100" y1="140" x2="100" y2="160" />
+                    <line class="svg-stroke" x1="40" y1="100" x2="60" y2="100" />
+                    <line class="svg-stroke" x1="140" y1="100" x2="160" y2="100" />
+                    <!-- Stand -->
+                    <path class="svg-stroke" d="M60,145 L40,190 L160,190 L140,145" />
+                    <line class="svg-stroke" x1="70" y1="170" x2="130" y2="170" />
+                    <!-- Flame -->
+                    <path class="svg-accent" d="M90,190 Q100,160 110,190" />
+                    <path class="svg-accent" d="M80,190 Q100,150 120,190" />
+                    <!-- Beans tumbling -->
+                    <path class="svg-accent" d="M85,75 C85,70 95,70 95,75 C95,80 85,80 85,75 Z" />
+                    <path class="svg-accent" d="M115,85 C115,80 125,80 125,85 C125,90 115,90 115,85 Z" />
+                    <path class="svg-accent" d="M75,115 C75,110 85,110 85,115 C85,120 75,120 75,115 Z" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Subscriptions -->
+    <section id="subscriptions">
+        <div class="container">
+            <h2 class="section-title">Never Run Out of Coffee</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto var(--spacing-xl);">Join the Terra Firma coffee club and have freshly roasted beans delivered straight to your door. Choose the plan that fits your consumption habits. Save 20% when you choose an annual subscription.</p>
+            
+            <div class="pricing-toggle">
+                <span id="monthlyLabel" style="font-weight: bold;">Monthly</span>
+                <label class="switch" aria-labelledby="monthlyLabel annualLabel">
+                    <input type="checkbox" id="pricingToggle" aria-label="Toggle Annual Pricing">
+                    <span class="slider"></span>
+                </label>
+                <span id="annualLabel">Annually (Save 20%)</span>
+            </div>
+
+            <div class="grid-3">
+                <!-- Tier 1 -->
+                <div class="card pricing-card">
+                    <h3 class="card-title">The Explorer</h3>
+                    <p>Perfect for the casual drinker.</p>
+                    <div class="price-amount" data-monthly="900" data-annual="720">₹900</div>
+                    <div class="price-period">per month</div>
+                    <ul class="pricing-features">
+                        <li>1 x 250g bag per month</li>
+                        <li>Roaster's choice single origin</li>
+                        <li>Tasting notes & brew guide</li>
+                        <li>Free shipping in India</li>
+                    </ul>
+                    <button class="btn" style="width: 100%;">Subscribe Now</button>
+                </div>
+                <!-- Tier 2 -->
+                <div class="card pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3 class="card-title">The Enthusiast</h3>
+                    <p>For the daily home brewer.</p>
+                    <div class="price-amount" data-monthly="1700" data-annual="1360">₹1700</div>
+                    <div class="price-period">per month</div>
+                    <ul class="pricing-features">
+                        <li>2 x 250g bags per month</li>
+                        <li>Choose your preferred origins</li>
+                        <li>Early access to limited releases</li>
+                        <li>Free shipping in India</li>
+                        <li>10% off all merchandise</li>
+                    </ul>
+                    <button class="btn" style="width: 100%;">Subscribe Now</button>
+                </div>
+                <!-- Tier 3 -->
+                <div class="card pricing-card">
+                    <h3 class="card-title">The Aficionado</h3>
+                    <p>For the serious coffee connoisseur.</p>
+                    <div class="price-amount" data-monthly="3200" data-annual="2560">₹3200</div>
+                    <div class="price-period">per month</div>
+                    <ul class="pricing-features">
+                        <li>4 x 250g bags per month</li>
+                        <li>Exclusive microlot access</li>
+                        <li>Complimentary cupping spoon</li>
+                        <li>Free shipping in India</li>
+                        <li>20% off all merchandise</li>
+                        <li>Direct line to our head roaster</li>
+                    </ul>
+                    <button class="btn" style="width: 100%;">Subscribe Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Brew Guides -->
+    <section id="brew-guides">
+        <div class="container">
+            <h2 class="section-title">Brew Guides</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto var(--spacing-xl);">Brewing great coffee at home is a rewarding ritual. While there are endless variables to tweak, these baseline recipes will help you extract the best flavors from our beans. Remember, the best cup of coffee is the one you enjoy, so feel free to experiment!</p>
+            
+            <!-- Hand-drawn inline SVG (V60/Pour over) -->
+            <svg class="svg-illustration" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <!-- Kettle -->
+                <path class="svg-stroke" d="M140,60 L160,60 C170,60 170,80 160,80 L140,80" />
+                <path class="svg-stroke" d="M100,40 L140,40 L140,100 L100,100 Z" />
+                <path class="svg-stroke" d="M100,90 C70,90 60,60 50,50" />
+                <path class="svg-stroke" d="M100,40 L120,20 L140,40" />
+                <!-- Water drops -->
+                <circle class="svg-accent" cx="45" cy="60" r="2" />
+                <circle class="svg-accent" cx="40" cy="70" r="2" />
+                <!-- V60 Dripper -->
+                <path class="svg-stroke" d="M20,100 L80,100 L60,140 L40,140 Z" />
+                <line class="svg-stroke" x1="30" y1="140" x2="70" y2="140" />
+                <!-- Mug -->
+                <path class="svg-stroke" d="M30,145 L70,145 L70,190 C70,195 65,200 60,200 L40,200 C35,200 30,195 30,190 Z" />
+                <path class="svg-stroke" d="M70,160 L80,160 C85,160 85,180 80,180 L70,180" />
+                <!-- Steam -->
+                <path class="svg-accent" d="M40,130 Q45,120 40,110" />
+                <path class="svg-accent" d="M60,130 Q55,120 60,110" />
+            </svg>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="v60">Hario V60</button>
+                <button class="tab-btn" data-tab="aeropress">AeroPress</button>
+                <button class="tab-btn" data-tab="frenchpress">French Press</button>
+                <button class="tab-btn" data-tab="espresso">Espresso</button>
+            </div>
+
+            <div class="tab-content active" id="v60">
+                <h3>Hario V60 Pour Over</h3>
+                <p>The V60 is renowned for producing a clean, bright cup that highlights the nuanced flavors and acidity of specialty coffee. It requires a gooseneck kettle for precise pouring.</p>
+                <p><strong>Ratio:</strong> 1:15 (20g coffee to 300g water)<br><strong>Grind:</strong> Medium-fine (like table salt)<br><strong>Water Temp:</strong> 93°C - 96°C</p>
+                <ol style="margin-left: 1.5rem; margin-top: 1rem; line-height: 1.8;">
+                    <li>Place the filter in the V60 and rinse thoroughly with hot water to remove any papery taste and preheat the brewer. Discard the rinse water.</li>
+                    <li>Add 20g of ground coffee, shake gently to level the bed, and tare your scale.</li>
+                    <li><strong>0:00 - The Bloom:</strong> Pour 60g of water in a circular motion, ensuring all grounds are saturated. Wait 45 seconds. This allows trapped CO2 to escape.</li>
+                    <li><strong>0:45 - First Pour:</strong> Slowly pour in concentric circles until the scale reads 150g.</li>
+                    <li><strong>1:15 - Second Pour:</strong> Continue pouring gently until you reach 225g.</li>
+                    <li><strong>1:45 - Final Pour:</strong> Pour the remaining water to reach 300g. Give the V60 a gentle swirl to settle the bed flat.</li>
+                    <li>The drawdown should finish around 2:45 to 3:15. If it drains too fast, grind finer next time; if too slow, grind coarser.</li>
+                </ol>
+            </div>
+
+            <div class="tab-content" id="aeropress">
+                <h3>AeroPress (Inverted Method)</h3>
+                <p>The AeroPress is incredibly versatile and forgiving. The inverted method allows for full immersion brewing, resulting in a full-bodied cup with rich flavors.</p>
+                <p><strong>Ratio:</strong> 1:14 (15g coffee to 210g water)<br><strong>Grind:</strong> Medium-fine<br><strong>Water Temp:</strong> 90°C - 93°C</p>
+                <ol style="margin-left: 1.5rem; margin-top: 1rem; line-height: 1.8;">
+                    <li>Push the plunger just inside the brewing chamber and stand it upside down on the plunger.</li>
+                    <li>Place a paper filter in the cap and rinse it with hot water.</li>
+                    <li>Add 15g of coffee into the chamber.</li>
+                    <li><strong>0:00:</strong> Pour 50g of water and stir vigorously to ensure all grounds are wet. Let it bloom for 30 seconds.</li>
+                    <li><strong>0:30:</strong> Pour the remaining water up to 210g. Stir gently once or twice.</li>
+                    <li><strong>1:30:</strong> Screw the rinsed filter cap tightly onto the chamber.</li>
+                    <li><strong>1:45:</strong> Carefully flip the entire assembly onto a sturdy mug.</li>
+                    <li>Press down slowly and steadily. The plunge should take about 30 seconds. Stop when you hear a hissing sound.</li>
+                </ol>
+            </div>
+
+            <div class="tab-content" id="frenchpress">
+                <h3>French Press</h3>
+                <p>The classic immersion brewer. It produces a heavy, textured cup because the metal mesh filter allows coffee oils and fine particles to pass through.</p>
+                <p><strong>Ratio:</strong> 1:15 (30g coffee to 450g water)<br><strong>Grind:</strong> Coarse (like sea salt)<br><strong>Water Temp:</strong> 95°C</p>
+                <ol style="margin-left: 1.5rem; margin-top: 1rem; line-height: 1.8;">
+                    <li>Preheat the French Press glass carafe with hot water, then discard.</li>
+                    <li>Add 30g of coarsely ground coffee.</li>
+                    <li><strong>0:00:</strong> Pour 450g of hot water vigorously to saturate all the grounds. Start your timer.</li>
+                    <li><strong>4:00:</strong> A crust of coffee grounds will have formed at the top. Take a spoon and gently break the crust, stirring a few times. Most of the grounds will fall to the bottom.</li>
+                    <li>Using two spoons, skim off the remaining foam and floating bits from the surface. This step significantly cleans up the final cup.</li>
+                    <li><strong>5:00:</strong> Place the plunger on top but do not press it all the way down. Just press it just below the surface of the liquid.</li>
+                    <li>Wait another 3-5 minutes. This allows the fine particles to settle at the bottom.</li>
+                    <li>Pour gently into your mug, leaving the last bit of liquid in the press to avoid sludge.</li>
+                </ol>
+            </div>
+
+            <div class="tab-content" id="espresso">
+                <h3>Espresso</h3>
+                <p>Espresso is a concentrated beverage brewed by forcing hot water under pressure through finely-ground coffee. It requires an espresso machine and a high-quality burr grinder.</p>
+                <p><strong>Ratio:</strong> 1:2 to 1:2.5 (18g in, 36g - 45g out)<br><strong>Grind:</strong> Very fine<br><strong>Water Temp:</strong> 93°C</p>
+                <ol style="margin-left: 1.5rem; margin-top: 1rem; line-height: 1.8;">
+                    <li>Remove the portafilter, wipe the basket clean and dry.</li>
+                    <li>Grind 18g of coffee into the basket.</li>
+                    <li>Distribute the grounds evenly using a distribution tool or by tapping the sides of the portafilter.</li>
+                    <li>Tamp the coffee bed firmly and perfectly level. The pressure should be around 15kg, but consistency is more important than absolute force.</li>
+                    <li>Flush the group head of your machine for a few seconds to stabilize temperature and clean the shower screen.</li>
+                    <li>Insert the portafilter, place your cup and scale underneath, tare, and start the extraction immediately.</li>
+                    <li>Aim for a yield of 36g to 45g of liquid espresso in about 25 to 30 seconds.</li>
+                    <li>If the shot runs too fast (under 20s), grind finer. If it runs too slow (over 35s), grind coarser. Adjust to taste!</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Sustainability & Impact -->
+    <section id="sustainability">
+        <div class="container grid-2">
+            <div>
+                <!-- Hand-drawn inline SVG (Leaf/Earth) -->
+                <svg class="svg-illustration" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Earth -->
+                    <circle class="svg-stroke" cx="100" cy="100" r="80" />
+                    <!-- Grid lines -->
+                    <path class="svg-stroke" d="M20,100 C60,140 140,140 180,100" />
+                    <path class="svg-stroke" d="M20,100 C60,60 140,60 180,100" />
+                    <path class="svg-stroke" d="M100,20 C60,60 60,140 100,180" />
+                    <path class="svg-stroke" d="M100,20 C140,60 140,140 100,180" />
+                    <!-- Leaf overlay -->
+                    <path class="svg-accent" d="M100,100 C150,50 180,20 180,20 C180,20 150,80 100,100 Z" style="fill: var(--color-bg);" />
+                    <path class="svg-accent" d="M100,100 C150,150 180,180 180,180 C180,180 150,120 100,100 Z" style="fill: var(--color-bg);" />
+                    <line class="svg-accent" x1="100" y1="100" x2="180" y2="20" />
+                    <line class="svg-accent" x1="100" y1="100" x2="180" y2="180" />
+                </svg>
+            </div>
+            <div>
+                <h2 class="section-title" style="text-align: left;">Our Commitment to the Earth</h2>
+                <p>At Terra Firma, sustainability is not a buzzword; it is woven into the very fabric of our business model. We recognize that coffee agriculture is highly vulnerable to climate change, and we have a responsibility to mitigate our impact.</p>
+                <p>We practice direct trade whenever possible, ensuring that the farmers who grow our coffee receive a premium price well above the commodity market rate. This financial stability allows them to invest in sustainable farming practices, pay fair wages to their workers, and support their local communities.</p>
+                <p>In our roastery in Goa, we have implemented a zero-waste initiative. All our coffee chaff and organic waste are composted and distributed to local community gardens. Our retail packaging is 100% compostable, made from plant-based materials that break down harmlessly in a home compost bin.</p>
+                <p>By choosing Terra Firma, you are not just buying a bag of coffee; you are supporting a supply chain that values environmental stewardship and human dignity. Together, we can ensure that great coffee remains sustainable for generations to come.</p>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- 9. Wholesale -->
+    <section id="wholesale">
+        <div class="container grid-2">
+            <div>
+                <h2 class="section-title" style="text-align: left;">Partner With Us</h2>
+                <p>Are you opening a cafe, restaurant, or boutique hotel in Goa or anywhere else in India? We would love to partner with you to elevate your coffee program. We offer comprehensive wholesale partnerships that go beyond just supplying freshly roasted beans.</p>
+                <p>Our wholesale partners receive dedicated support, including barista training, equipment consultation, and ongoing quality control checks. We believe that your success is our success, and we are committed to helping you serve the best possible cup of coffee to your guests.</p>
+                <p>We can also work with you to develop custom roast profiles or exclusive blends that perfectly match your brand's identity and culinary offerings. Let's build a vibrant coffee culture together.</p>
+                <a href="mailto:wholesale@terrafirma.coffee" class="btn" style="margin-top: var(--spacing-md);">Inquire About Wholesale</a>
+            </div>
+            <div>
+                <!-- Hand-drawn inline SVG (Coffee Cup/Latte Art) -->
+                <svg class="svg-illustration" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Saucer -->
+                    <ellipse class="svg-stroke" cx="100" cy="160" rx="70" ry="20" />
+                    <ellipse class="svg-stroke" cx="100" cy="165" rx="60" ry="15" />
+                    <!-- Cup -->
+                    <path class="svg-stroke" d="M40,90 C40,150 60,160 100,160 C140,160 160,150 160,90 Z" />
+                    <ellipse class="svg-stroke" cx="100" cy="90" rx="60" ry="15" />
+                    <!-- Handle -->
+                    <path class="svg-stroke" d="M160,100 C190,100 190,140 150,140" />
+                    <!-- Latte Art (Rosetta) -->
+                    <path class="svg-accent" d="M100,100 C90,95 80,100 100,105 C120,110 110,115 100,115 C90,115 80,120 100,125 C110,130 105,135 100,135" />
+                    <line class="svg-accent" x1="100" y1="135" x2="100" y2="90" />
+                    <!-- Steam -->
+                    <path class="svg-accent" d="M80,70 Q90,50 80,30" />
+                    <path class="svg-accent" d="M120,70 Q110,50 120,30" />
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. FAQ -->
+    <section id="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="accordion">
+                <!-- FAQ 1 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        How fresh is your coffee?
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="margin-top: var(--spacing-md);">We roast to order. This means your coffee is roasted only after you place your order, typically within 24-48 hours. We ship it immediately so it arrives at your doorstep at peak freshness. We recommend resting the coffee for 5-7 days post-roast before brewing for optimal flavor development.</p>
+                    </div>
+                </div>
+                <!-- FAQ 2 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        Do you sell whole bean or ground coffee?
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="margin-top: var(--spacing-md);">We highly recommend purchasing whole bean coffee and grinding it fresh right before brewing. Coffee loses its volatile aromatics very quickly once ground. However, we understand that not everyone has a grinder, so we do offer pre-ground options for various brewing methods (Espresso, Aeropress, V60, French Press) upon request at checkout.</p>
+                    </div>
+                </div>
+                <!-- FAQ 3 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        Where is your cafe located in Goa?
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="margin-top: var(--spacing-md);">Our flagship roastery and cafe is located in the vibrant neighborhood of Assagao, North Goa. We are open Tuesday through Sunday from 8:00 AM to 6:00 PM. Come visit us to see the roaster in action, enjoy a meticulously crafted pour-over, and pick up some fresh beans!</p>
+                    </div>
+                </div>
+                <!-- FAQ 4 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        How does the subscription work?
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="margin-top: var(--spacing-md);">Our subscriptions are fully customizable. You can choose the frequency (every 1, 2, or 4 weeks) and the quantity. You will be billed automatically based on your chosen schedule. You can pause, modify, or cancel your subscription at any time through your customer portal on our website. Annual subscriptions are billed once upfront and offer a 20% discount.</p>
+                    </div>
+                </div>
+                <!-- FAQ 5 -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        What is the difference between Washed and Natural process?
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p style="margin-top: var(--spacing-md);">These are methods used to remove the coffee bean (seed) from the coffee cherry. In the Washed process, the fruit is removed mechanically and fermented before drying, resulting in a clean, bright cup with high clarity. In the Natural process, the whole cherry is dried in the sun before the fruit is removed, which imparts heavy, fruity, and winey flavors to the bean.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Footer -->
+    <footer>
+        <div class="container">
+            <h2 style="font-family: var(--font-serif); margin-bottom: var(--spacing-md);">Terra Firma Coffee Roasters</h2>
+            <p>House No. 123, Assagao, North Goa, 403507, India</p>
+            <p>Email: hello@terrafirma.coffee | Phone: +91 98765 43210</p>
+            <p style="margin-top: var(--spacing-lg); color: var(--color-muted); font-size: 0.875rem;">
+                &copy; 2024 Terra Firma Coffee Roasters. All rights reserved. <br>
+                Designed with passion in Goa.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Dark Mode Toggle (Persisted to localStorage)
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        
+        // Check for saved theme preference or system preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeIcon.textContent = '☀️ Light Mode';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeIcon.textContent = '🌙 Dark Mode';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.textContent = '☀️ Light Mode';
+            }
+        });
+
+        // 2. Pricing Toggle (Monthly/Annual)
+        const pricingToggle = document.getElementById('pricingToggle');
+        const monthlyLabel = document.getElementById('monthlyLabel');
+        const annualLabel = document.getElementById('annualLabel');
+        const priceAmounts = document.querySelectorAll('.price-amount');
+        const pricePeriods = document.querySelectorAll('.price-period');
+
+        pricingToggle.addEventListener('change', (e) => {
+            const isAnnual = e.target.checked;
+            
+            if (isAnnual) {
+                monthlyLabel.style.fontWeight = 'normal';
+                annualLabel.style.fontWeight = 'bold';
+                
+                priceAmounts.forEach(el => {
+                    el.textContent = '₹' + el.getAttribute('data-annual');
+                });
+                pricePeriods.forEach(el => {
+                    el.textContent = 'per month, billed annually';
+                });
+            } else {
+                monthlyLabel.style.fontWeight = 'bold';
+                annualLabel.style.fontWeight = 'normal';
+                
+                priceAmounts.forEach(el => {
+                    el.textContent = '₹' + el.getAttribute('data-monthly');
+                });
+                pricePeriods.forEach(el => {
+                    el.textContent = 'per month';
+                });
+            }
+        });
+
+        // 3. Brew Guide Tabs
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked
+                btn.classList.add('active');
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Mobile Menu
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        // 4. FAQ Accordion
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all other items (optional, but good for UX)
+                document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.accordion-header').setAttribute('aria-expanded', 'false');
+                    otherItem.querySelector('.accordion-content').style.maxHeight = null;
+                });
+
+                if (!isActive) {
+                    item.classList.add('active');
+                    header.setAttribute('aria-expanded', 'true');
+                    const content = item.querySelector('.accordion-content');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
