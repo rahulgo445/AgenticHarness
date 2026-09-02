@@ -71,11 +71,16 @@ def _interactive(harness, mode):
 
 def main(argv=None):
     """Parse arguments and dispatch to the headless or interactive path."""
-    # Some standalone Python builds ship without a CA bundle; fall back to the
+    # Some standalone Python builds ship without a CA bundle; fall back to a
     # system one so an installed `odysseus` command can make HTTPS calls
     # without the caller exporting SSL_CERT_FILE by hand.
-    if "SSL_CERT_FILE" not in os.environ and os.path.exists("/etc/ssl/cert.pem"):
-        os.environ["SSL_CERT_FILE"] = "/etc/ssl/cert.pem"
+    if "SSL_CERT_FILE" not in os.environ:
+        for _bundle in ("/etc/ssl/cert.pem",                       # macOS, BSD
+                        "/etc/ssl/certs/ca-certificates.crt",      # Debian/Ubuntu
+                        "/etc/pki/tls/certs/ca-bundle.crt"):       # Fedora/RHEL
+            if os.path.exists(_bundle):
+                os.environ["SSL_CERT_FILE"] = _bundle
+                break
 
     parser = argparse.ArgumentParser(
         prog="odysseus", description="A small, sharp coding agent.")
