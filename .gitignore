@@ -3,3 +3,6 @@ __pycache__/
 .DS_Store
 .env
 .odysseus/
+build/
+*.egg-info/
+dist/
