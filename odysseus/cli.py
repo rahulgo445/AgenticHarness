@@ -6,6 +6,7 @@ as it happens and, in safe mode, stop to ask before any state-changing tool.
 """
 
 import argparse
+import os
 import sys
 
 from .harness import Harness
@@ -70,6 +71,12 @@ def _interactive(harness, mode):
 
 def main(argv=None):
     """Parse arguments and dispatch to the headless or interactive path."""
+    # Some standalone Python builds ship without a CA bundle; fall back to the
+    # system one so an installed `odysseus` command can make HTTPS calls
+    # without the caller exporting SSL_CERT_FILE by hand.
+    if "SSL_CERT_FILE" not in os.environ and os.path.exists("/etc/ssl/cert.pem"):
+        os.environ["SSL_CERT_FILE"] = "/etc/ssl/cert.pem"
+
     parser = argparse.ArgumentParser(
         prog="odysseus", description="A small, sharp coding agent.")
     parser.add_argument("-p", "--prompt", help="run this task headless, then exit")
